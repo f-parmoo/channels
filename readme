@@ -1,0 +1,58 @@
+Note:
+    for Importing data in our database please run read_csv function
+    I designed one API with post method, we can pass Metrics, breakdowns, Sorting and Filters to this unique API and get the result as a json
+
+Common API use-cases:
+1. Show the number of impressions and clicks that occurred before the 1st of June 2017, broken down by channel and country, sorted by clicks in descending order. Hint:
+    endpoint:http://127.0.0.1:5000
+    body JSON:
+        {
+            "metrics" :["impressions","clicks"],
+            "breakdowns" : ["channel","country"],
+            "sorting": [{"name":"clicks", "type":"desc"}],
+            "filters":[{"name":"date_to","value":"2017-05-31"}]
+        }
+
+2. Show the number of installs that occurred in May of 2017 on iOS, broken down by date, sorted by date in ascending order.
+    endpoint:http://127.0.0.1:5000
+    body JSON:
+        {
+            "metrics" :["installs"],
+            "breakdowns" : ["date"],
+            "sorting": [{"name":"date" , "type":"asc"}],
+            "filters":
+            [
+                {"name": "date_from", "value":"2017-05-01"},
+                {"name": "date_to", "value":"2017-05-31"},
+                {"name": "os", "value":"ios"}
+            ]
+        }
+
+
+
+3. Show revenue, earned on June 1, 2017 in US, broken down by operating system and sorted by revenue in descending order.
+    endpoint:http://127.0.0.1:5000
+    body JSON:
+        {
+            "metrics" :["revenue"],
+            "breakdowns" : ["os"],
+            "sorting": [{"name":"revenue" , "type":"desc"}],
+             "filters":  [{
+                 "name":"date",
+                 "value":"2017-06-01"
+             },
+             {
+                 "name":"country",
+                 "value":"US"
+             }]
+        }
+
+4. Show CPI and spend for Canada (CA) broken down by channel ordered by CPI in descending order. Please think carefully which is an appropriate aggregate function for CPI.
+    endpoint:http://127.0.0.1:5000
+    body JSON:
+        {
+            "metrics" :["CPI","spend"],
+            "breakdowns" : ["channel"],
+            "sorting": [{"name":"CPI", "type": "desc"}],
+            "filters": [ {"name" :"country","value":"CA"}]
+        }
